@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.4",
+    "@material-ui/styles": "^4.11.5",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "autoprefixer": "^10.4.17",
     "chart.js": "^4.4.1",
     "postcss": "^8.4.33",

@@ -26,7 +26,8 @@ const FixedAssetCalculator = ({
     updateInterestRate(value);
   };
 
-  const handleCalculate = () => {
+  const handleCalculate = (event) => {
+    event.stopPropagation();
     const calculatedAmount = exactAmountSelected
       ? parseFloat(investmentAmount)
       : parseFloat(investmentAmount) || 0;
@@ -47,7 +48,7 @@ const FixedAssetCalculator = ({
     onInterestRateSelect(interestRate);
 
     // Trigger the parent component's calculate function
-    onCalculate();
+    onCalculate(event);
   };
 
   return (
@@ -108,7 +109,7 @@ const FixedAssetCalculator = ({
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
           type="button"
-          onClick={handleCalculate}
+          onClick={(event)=>handleCalculate (event)}
         >
           Calculate
         </button>
