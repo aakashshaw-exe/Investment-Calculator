@@ -52,20 +52,22 @@ const FixedAssetCalculator = ({
   };
 
   return (
-    <div className="bg-blue-100 p-6 rounded-md shadow-md mx-auto max-w-md">
-      <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Fixed Asset Calculator</h2>
+    <div className="bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900  p-6 rounded-md shadow-md mx-auto max-w-md">
+
+
+      <h2 className="text-2xl font-bold mb-4 text-center text-zinc-950">Fixed Asset Calculator</h2>
       <form className="space-y-4">
 
         {exactAmountSelected ? (
           <div>
-            <label htmlFor="investmentAmount" className="block text-gray-700 text-sm font-bold mt-2">
+            <label htmlFor="investmentAmount" className="block text-zinc-950 text-sm font-bold mt-2">
               Enter Exact Amount:
             </label>
             <div className="flex items-center space-x-2">
               <input
                 id="investmentAmount"
                 name="investmentAmount"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-950 leading-tight focus:outline-none focus:shadow-outline"
                 type="number"
                 value={investmentAmount}
                 onChange={(e) => handleAmountChange(e.target.value)}
@@ -74,7 +76,7 @@ const FixedAssetCalculator = ({
                 type="range"
                 min="2000"
                 max="100000"
-                step="1"
+                step="1000"
                 value={investmentAmount}
                 onChange={(e) => handleAmountChange(e.target.value)}
                 className="mt-2 flex-1"
@@ -84,7 +86,7 @@ const FixedAssetCalculator = ({
         ) : null}
 
         <div>
-          <label htmlFor="durationRange" className="block text-gray-700 text-sm font-bold mt-2">
+          <label htmlFor="durationRange" className="block text-zinc-950 text-sm font-bold mt-2">
             Select Duration Range:
           </label>
           <select
@@ -102,8 +104,8 @@ const FixedAssetCalculator = ({
         </div>
 
         <div className="mb-4">
-          <p className="text-gray-700 text-sm font-bold mb-2">Current Interest Rate:</p>
-          <p className="text-blue-500 text-lg">{interestRate}%</p>
+          <p className="text-zinc-950 text-sm font-bold mb-2">Current Interest Rate:</p>
+          <p className="text-zinc-950 text-lg">{interestRate}%</p>
         </div>
 
         <button

@@ -1,5 +1,5 @@
 import React from 'react';
-import lock from '../../public/lock-image.png';
+import lock from '../Components/lock-image.png';
 
 const SIPCalculator = () => {
   return (

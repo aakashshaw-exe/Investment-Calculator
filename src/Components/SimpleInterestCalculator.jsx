@@ -30,7 +30,7 @@ const SimpleInterestCalculator = ({ investedAmount, durationMonths, interestRate
         <p className="text-blue-500 text-lg">
           {typeof investedAmount === 'number'
             ? `₹${investedAmount.toFixed(2)}`
-            : 'Invalid value'}
+            : '₹0.00'}
         </p>
       </div>
 
@@ -39,7 +39,7 @@ const SimpleInterestCalculator = ({ investedAmount, durationMonths, interestRate
         <p className="text-blue-500 text-lg">
           {typeof estimatedReturns === 'number'
             ? `₹${estimatedReturns.toFixed(2)}`
-            : 'Invalid value'}
+            : '₹0.00'}
         </p>
       </div>
 
@@ -48,7 +48,7 @@ const SimpleInterestCalculator = ({ investedAmount, durationMonths, interestRate
         <p className="text-blue-500 text-lg">
           {typeof assetUnderManagement === 'number'
             ? `₹${assetUnderManagement.toFixed(2)}`
-            : 'Invalid value'}
+            : '₹0.00'}
         </p>
       </div>
     </div>

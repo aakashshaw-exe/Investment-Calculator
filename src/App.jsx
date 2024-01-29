@@ -1,3 +1,4 @@
+// Import necessary components and React
 import React, { useState, useEffect } from 'react';
 import FixedAssetCalculator from './Components/FixedAssetCalculator';
 import LiquidAssetCalculator from './Components/LiquidAssetCalculator';
@@ -5,24 +6,27 @@ import SimpleInterestCalculator from './Components/SimpleInterestCalculator';
 import HIPCalculator from './Components/HIPCalculator';
 import SIPCalculator from './Components/SIPCalculator.jsx';
 
+// Define the App component
 const App = () => {
+  // State to manage selected options and calculated values
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedAmountRange, setSelectedAmountRange] = useState(null);
   const [selectedPeriodRange, setSelectedPeriodRange] = useState(null);
   const [selectedInterestRate, setSelectedInterestRate] = useState(null);
-
   const [estimatedReturns, setEstimatedReturns] = useState(0);
   const [assetUnderManagement, setAssetUnderManagement] = useState(0);
 
+  // State to control the display of Investment Summary
   const [showInvestmentSummary, setShowInvestmentSummary] = useState(true);
-  
+
+  // Function to handle option selection
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     clearState();
     setShowInvestmentSummary(option !== 'SIPCalculator');
   };
 
-
+  // Function to clear state
   const clearState = () => {
     setSelectedAmountRange(null);
     setSelectedPeriodRange(null);
@@ -31,6 +35,7 @@ const App = () => {
     setAssetUnderManagement(0);
   };
 
+  // Functions to handle user input
   const handleAmountSelect = (amount) => {
     setSelectedAmountRange(amount);
   };
@@ -43,49 +48,52 @@ const App = () => {
     setSelectedInterestRate(rate);
   };
 
+  // Function to handle calculation
   const handleCalculate = (event) => {
     event.preventDefault();
-  
+
     if (!selectedOption) {
       console.error('Invalid option selected.');
       return;
     }
-  
+
     const principal = parseFloat(selectedAmountRange) || 0;
     const time = parseFloat(selectedPeriodRange) || 0;
-  
+
     if (isNaN(principal) || isNaN(time)) {
       console.error('Invalid principal or time input.');
       return;
     }
-  
+
     let simpleInterest = 0;
-  
+
     if (selectedOption === 'LiquidAsset') {
       const rate = 0.1; // Constant interest rate for LiquidAsset
       simpleInterest = (principal * rate * time) / 100;
     } else if (selectedOption === 'HIPCalculator') {
       // Code for HIPCalculator calculation
     }
-  
+
     setEstimatedReturns(simpleInterest);
     setAssetUnderManagement(principal + simpleInterest);
-  
+
     setShowInvestmentSummary(false);
   };
-  
-  // Define the missing function
+
+  // Function to handle the update of Simple Interest values
   const handleUpdateSimpleInterest = (values) => {
     // Handle the update of Simple Interest values
     console.log('Simple Interest values updated:', values);
   };
 
+  // JSX for rendering the component
   return (
     <div className="bg-white p-4">
       <div className="fixed top-0 left-0 right-0 flex flex-col items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-4">
         <h1 className="text-3xl font-bold mb-4">Investment Calculator</h1>
-  
+
         <div className="flex space-x-4">
+          {/* Buttons for selecting different options */}
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => handleOptionSelect('FixedAsset')}
@@ -148,7 +156,7 @@ const App = () => {
           <SIPCalculator />
         )}
   
-        {showInvestmentSummary && (
+        {showInvestmentSummary && selectedOption !== 'HIPCalculator' &&(
           <SimpleInterestCalculator
             investedAmount={parseFloat(selectedAmountRange)} // Ensure it's a number
             durationMonths={selectedPeriodRange}

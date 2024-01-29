@@ -48,18 +48,18 @@ const LiquidAssetCalculator = ({
   };
 
   return (
-    <div className="bg-green-100 p-6 rounded-md shadow-md mx-auto max-w-md">
-      <h2 className="text-2xl font-bold mb-4 text-center text-green-500">Liquid Asset Calculator</h2>
+    <div className="bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900  p-6 rounded-md shadow-md mx-auto max-w-md">
+      <h2 className="text-2xl font-bold mb-4 text-center text-zinc-950">Liquid Asset Calculator</h2>
       <form className="space-y-4">
         <div>
-          <label htmlFor="investmentAmount" className="block text-gray-700 text-sm font-bold mt-2">
+          <label htmlFor="investmentAmount" className="block text- text-sm font-bold mt-2">
             Enter Exact Amount:
           </label>
           <div className="flex items-center space-x-2">
             <input
               id="investmentAmount"
               name="investmentAmount"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-zinc-950 leading-tight focus:outline-none focus:shadow-outline"
               type="number"
               value={investmentAmount}
               onChange={(e) => handleAmountChange(e.target.value)}
@@ -68,7 +68,7 @@ const LiquidAssetCalculator = ({
         </div>
 
         <div>
-          <label htmlFor="durationType" className="block text-gray-700 text-sm font-bold mt-2">
+          <label htmlFor="durationType" className="block text-zinc-950 text-sm font-bold mt-2">
             Select Duration Type:
           </label>
           <select
@@ -85,13 +85,13 @@ const LiquidAssetCalculator = ({
 
         {durationType === 'days' && (
           <div>
-            <label htmlFor="durationValue" className="block text-gray-700 text-sm font-bold mt-2">
+            <label htmlFor="durationValue" className="block text-zinc-950 text-sm font-bold mt-2">
               Enter Number of Days:
             </label>
             <input
               id="durationValue"
               name="durationValue"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-zinc-950 leading-tight focus:outline-none focus:shadow-outline"
               type="number"
               value={durationValue}
               onChange={(e) => handleDurationChange(e.target.value)}
@@ -101,13 +101,13 @@ const LiquidAssetCalculator = ({
 
         {durationType === 'months' && (
           <div>
-            <label htmlFor="durationMonths" className="block text-gray-700 text-sm font-bold mt-2">
+            <label htmlFor="durationMonths" className="block text-zinc-950 text-sm font-bold mt-2">
               Select Duration Range (Months):
             </label>
             <select
               id="durationMonths"
               name="durationMonths"
-              className="block appearance-none w-full border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="block appearance-none w-1/2 border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               onChange={(e) => setDurationMonths(e.target.value)}
               value={durationMonths}
             >
@@ -120,12 +120,12 @@ const LiquidAssetCalculator = ({
         )}
 
         <div className="mb-4">
-          <p className="text-gray-700 text-sm font-bold mb-2">Daily Interest Rate:</p>
-          <p className="text-green-500 text-lg">{interestRate}%</p>
+          <p className="text-zinc-950 text-sm font-bold mb-2">Daily Interest Rate:</p>
+          <p className="text-zinc-950 text-lg ">{interestRate}%</p>
         </div>
 
         <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-"
           type="button"
           onClick={handleCalculate}
         >

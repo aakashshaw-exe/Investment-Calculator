@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const HIPCalculator = ({
-  onAmountSelect,
-  onPeriodRangeSelect,
-  onInterestRateSelect,
-  onCalculate,
-  onUpdateSimpleInterest,
-}) => {
+const HIPCalculator = () => {
   const [investments, setInvestments] = useState(Array(12).fill(''));
   const [isTerminated, setIsTerminated] = useState(false);
 
@@ -24,31 +18,13 @@ const HIPCalculator = ({
     setIsTerminated(true);
   };
 
-  const handleContinue = (event) => {
+  const handleContinue = () => {
     setIsTerminated(false);
   };
 
   useEffect(() => {
-    // Recalculate the Investment Summary
     calculateInvestmentSummary(investments);
   }, [investments]);
-
-  useEffect(() => {
-    // Update state and potentially parent component based on active month
-    onAmountSelect(investedAmount.toFixed(2));
-    onPeriodRangeSelect('12'); // Assuming a fixed period of 12 months
-    onInterestRateSelect('5.00'); // Assuming a fixed interest rate of 5%
-
-    // Pass calculated values to SimpleInterestCalculator (if applicable)
-    onUpdateSimpleInterest({
-      investedAmount,
-      estimatedReturns,
-      assetUnderManagement,
-    });
-
-    // Trigger calculation in parent component
-    // onCalculate(investedAmount, estimatedReturns, assetUnderManagement,);
-  }, [investedAmount, estimatedReturns, assetUnderManagement]);
 
   const calculateInvestmentSummary = (updatedInvestments) => {
     const monthlyInterestRate = 0.05; // Monthly interest rate (5%)
@@ -84,43 +60,72 @@ const HIPCalculator = ({
     setAssetUnderManagement(totalAssetUnderManagement);
   };
 
+
   return (
-    <div className="bg-gradient-to-r from-cyan-500 to-blue-500 p-6 rounded-md shadow-md mx-auto max-w-md text-white">
-      <h1 className="text-2xl font-bold mb-4">HIP Calculator</h1>
+    <div>
+      {/* Main Layout */}
+      <div className="bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900 p-6 rounded-md shadow-md mx-auto max-w-md text-white">
+        <h1 className="text-2xl font-bold mb-4">HIP Calculator</h1>
 
-      {isTerminated ? (
-        <p className="text-red-600 font-bold">Plan Terminated</p>
-      ) : (
-        <div>
-          <p className="mb-4">Enter the investment amount for each month:</p>
-          {investments.map((investment, monthIndex) => (
-            <div key={monthIndex} className="mb-4 flex items-center">
-              <label className="mr-2">{`Month ${monthIndex + 1}: ₹`}</label>
-              <input
-                className="border rounded px-2 py-1 text-black"
-                type="number"
-                value={investment}
-                onChange={(e) => handleInvestmentChange(monthIndex, e.target.value)}
-              />
+        {isTerminated ? (
+          <p className="text-red-600 font-bold">Plan Terminated</p>
+        ) : (
+          <div>
+            <div className="mb-4">
+              <p className="mb-4">Enter the investment amount for each month:</p>
+              {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((monthName, monthIndex) => (
+                <div key={monthIndex} className="mb-4 flex items-center">
+                  <label className="mr-2">{`${monthName}: ₹`}</label>
+                  <input
+                    className="border rounded px-2 py-1 text-black"
+                    type="number"
+                    value={investments[monthIndex]}
+                    onChange={(e) => handleInvestmentChange(monthIndex, e.target.value)}
+                  />
+                </div>
+              ))}
+             
             </div>
-          ))}
 
-          <button
-            className="bg-cardin-green hover:bg-red-700 text-black font-bold py-2 px-4 mr-2"
-            onClick={handleTerminate}
-          >
-            Terminate Plan
-          </button>
-          <button
-            className="bg-cardin-green hover:bg-green-700 text-black font-bold py-2 px-4"
-            onClick={(event)=>handleContinue(event)}
-          >
-            Continue
-          </button>
+
+            <button
+              className="bg-cardin-green hover:bg-red-700 text-black font-bold py-2 px-4 mr-2"
+              onClick={handleTerminate}
+            >
+              Terminate Plan
+            </button>
+            <button
+              className="bg-cardin-green hover:bg-green-700 text-black font-bold py-2 px-4"
+              onClick={handleContinue}
+            >
+              Continue
+            </button>
+          </div>
+        )}
+        <hr className="my-4 border-white" />
+      </div>
+
+      {/* Space between main layout and investment summary */}
+      <div className="my-8" />
+
+      {/* Investment Summary */}
+      <div className="bg-gray-200 p-6 rounded-md shadow-md">
+        <h2 className="text-2xl font-bold mb-4">Investment Summary</h2>
+        <div className="mb-4">
+          <p className="block text-gray-700 text-sm font-bold mb-2">Invested Amount:</p>
+          <p className="text-blue-500 text-lg">₹{investedAmount.toFixed(2)}</p>
         </div>
-      )}
 
-      <hr className="my-4 border-white" />
+        <div className="mb-4">
+          <p className="block text-gray-700 text-sm font-bold mb-2">Estimated Returns:</p>
+          <p className="text-blue-500 text-lg">₹{estimatedReturns.toFixed(2)}</p>
+        </div>
+
+        <div className="mb-4">
+          <p className="block text-gray-700 text-sm font-bold mb-2">Asset Under Management:</p>
+          <p className="text-blue-500 text-lg">₹{assetUnderManagement.toFixed(2)}</p>
+        </div>
+      </div>
     </div>
   );
 };
