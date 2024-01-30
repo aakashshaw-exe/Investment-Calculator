@@ -72,15 +72,25 @@ const FixedAssetCalculator = ({
                 value={investmentAmount}
                 onChange={(e) => handleAmountChange(e.target.value)}
               />
+            </div>
+
+            <div className="mt-2 flex items-center space-x-4">
+              <label htmlFor="rangeInput" className="block text-zinc-950 text-sm font-bold">
+                Select Range:
+              </label>
               <input
+                id="rangeInput"
                 type="range"
-                min="2000"
+                min="1000"
                 max="100000"
-                step="1000"
+                step="9000"
                 value={investmentAmount}
                 onChange={(e) => handleAmountChange(e.target.value)}
-                className="mt-2 flex-1"
+                className="flex-1"
+                list="investmentAmountList"
               />
+              
+              <span className="text-sm font-semibold">{investmentAmount}</span>
             </div>
           </div>
         ) : null}
@@ -92,7 +102,7 @@ const FixedAssetCalculator = ({
           <select
             id="durationRange"
             name="durationRange"
-            className="block appearance-none w-full border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="block appearance-none w-1/2 border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
             onChange={(e) => setDurationMonths(e.target.value)}
             value={durationMonths}
           >
@@ -111,7 +121,7 @@ const FixedAssetCalculator = ({
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
           type="button"
-          onClick={(event)=>handleCalculate (event)}
+          onClick={(event) => handleCalculate(event)}
         >
           Calculate
         </button>

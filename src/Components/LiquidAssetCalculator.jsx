@@ -48,25 +48,25 @@ const LiquidAssetCalculator = ({
   };
 
   return (
-    <div className="bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900  p-6 rounded-md shadow-md mx-auto max-w-md">
-      <h2 className="text-2xl font-bold mb-4 text-center text-zinc-950">Liquid Asset Calculator</h2>
+    <div className="bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900 p-6 rounded-md shadow-md mx-auto max-w-md text-center">
+      <h2 className="text-2xl font-bold mb-4 text-zinc-950">Liquid Asset Calculator</h2>
       <form className="space-y-4">
-        <div>
-          <label htmlFor="investmentAmount" className="block text- text-sm font-bold mt-2">
+        <div className="mx-auto">
+          <label htmlFor="investmentAmount" className="block text-sm font-bold mt-2 text-zinc-950">
             Enter Exact Amount:
           </label>
-          <div className="flex items-center space-x-2">
+          <div className=" items-center space-x-2">
             <input
               id="investmentAmount"
               name="investmentAmount"
-              className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-zinc-950 leading-tight focus:outline-none focus:shadow-outline"
+              className=" shadow appearance-none border rounded w-1/2 py-2 px-3 text-zinc-950 leading-tight focus:outline-none focus:shadow-outline"
               type="number"
               value={investmentAmount}
               onChange={(e) => handleAmountChange(e.target.value)}
             />
           </div>
         </div>
-
+  
         <div>
           <label htmlFor="durationType" className="block text-zinc-950 text-sm font-bold mt-2">
             Select Duration Type:
@@ -74,7 +74,7 @@ const LiquidAssetCalculator = ({
           <select
             id="durationType"
             name="durationType"
-            className="block appearance-none w-1/2 border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="block appearance-none w-1/2 border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline mx-auto"
             onChange={(e) => handleDurationTypeChange(e.target.value)}
             value={durationType}
           >
@@ -82,7 +82,7 @@ const LiquidAssetCalculator = ({
             <option value="months">Months</option>
           </select>
         </div>
-
+  
         {durationType === 'days' && (
           <div>
             <label htmlFor="durationValue" className="block text-zinc-950 text-sm font-bold mt-2">
@@ -98,7 +98,7 @@ const LiquidAssetCalculator = ({
             />
           </div>
         )}
-
+  
         {durationType === 'months' && (
           <div>
             <label htmlFor="durationMonths" className="block text-zinc-950 text-sm font-bold mt-2">
@@ -118,14 +118,14 @@ const LiquidAssetCalculator = ({
             </select>
           </div>
         )}
-
+  
         <div className="mb-4">
           <p className="text-zinc-950 text-sm font-bold mb-2">Daily Interest Rate:</p>
           <p className="text-zinc-950 text-lg ">{interestRate}%</p>
         </div>
-
+  
         <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/2"
           type="button"
           onClick={handleCalculate}
         >
@@ -133,7 +133,8 @@ const LiquidAssetCalculator = ({
         </button>
       </form>
     </div>
-  );
+  ); 
+    
 };
 
 export default LiquidAssetCalculator;
