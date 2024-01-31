@@ -78,7 +78,7 @@ const App = () => {
     setEstimatedReturns(simpleInterest);
     setAssetUnderManagement(principal + simpleInterest);
 
-    setShowInvestmentSummary(false);
+    setShowInvestmentSummary(true);
     console.log('Calculation completed. Estimated Returns:', simpleInterest);
   };
 
