@@ -91,39 +91,39 @@ const App = () => {
   // JSX for rendering the component
   return (
     <div className="bg-white p-4">
-  <div className="fixed top-0 left-0 right-0 flex flex-col items-center justify-center bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900 text-white p-4">
-    <h1 className="text-3xl font-bold mb-4">Investment Calculator</h1>
+      <div className="fixed top-0 left-0 right-0 flex flex-col items-center justify-center bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900 text-white p-4">
+        <h1 className="text-3xl font-bold mb-4">Investment Calculator</h1>
 
-    <div className="flex flex-col-4 space-x-4 ">
-      {/* Text options for selecting different functionalities */}
-      <span
-        className={`text-lg hover:text-zinc-950 cursor-pointer ${selectedOption === 'FixedAsset' ? 'underline' : ''}`}
-        onClick={() => handleOptionSelect('FixedAsset')}
-      >
-        Fixed Asset
-      </span>
-      <span
-        className={`text-lg hover:text-zinc-950  cursor-pointer ${selectedOption === 'LiquidAsset' ? 'underline' : ''}`}
-        onClick={() => handleOptionSelect('LiquidAsset')}
-      >
-        Liquid Asset
-      </span>
-      <span
-        className={`text-lg hover:text-zinc-950 cursor-pointer ${selectedOption === 'HIPCalculator' ? 'underline' : ''}`}
-        onClick={() => handleOptionSelect('HIPCalculator')}
-      >
-        HIP Calculator
-      </span>
-      <span
-        className={`text-lg hover:text-zinc-950 cursor-pointer ${selectedOption === 'SIPCalculator' ? 'underline' : ''}`}
-        onClick={() => handleOptionSelect('SIPCalculator')}
-      >
-        SIP Calculator
-      </span>
-    </div>
-  </div>
+        <div className="flex flex-col-4 space-x-4 ">
+          {/* Text options for selecting different functionalities */}
+          <span
+            className={`text-lg hover:text-zinc-950 cursor-pointer ${selectedOption === 'FixedAsset' ? 'underline' : ''}`}
+            onClick={() => handleOptionSelect('FixedAsset')}
+          >
+            Fixed Asset
+          </span>
+          <span
+            className={`text-lg hover:text-zinc-950  cursor-pointer ${selectedOption === 'LiquidAsset' ? 'underline' : ''}`}
+            onClick={() => handleOptionSelect('LiquidAsset')}
+          >
+            Liquid Asset
+          </span>
+          <span
+            className={`text-lg hover:text-zinc-950 cursor-pointer ${selectedOption === 'HIPCalculator' ? 'underline' : ''}`}
+            onClick={() => handleOptionSelect('HIPCalculator')}
+          >
+            HIP Calculator
+          </span>
+          <span
+            className={`text-lg hover:text-zinc-950 cursor-pointer ${selectedOption === 'SIPCalculator' ? 'underline' : ''}`}
+            onClick={() => handleOptionSelect('SIPCalculator')}
+          >
+            SIP Calculator
+          </span>
+        </div>
+      </div>
 
-  
+
       {/* Space for fixed header */}
       <div className="mt-32">
         {/* Your existing component rendering code */}
@@ -135,7 +135,7 @@ const App = () => {
             onCalculate={(e) => handleCalculate(e)}
           />
         )}
-  
+
         {selectedOption === 'LiquidAsset' && (
           <LiquidAssetCalculator
             onAmountSelect={(amount) => handleAmountSelect(amount)}
@@ -144,22 +144,24 @@ const App = () => {
             onCalculate={(e) => handleCalculate(e)}
           />
         )}
-  
+
         {selectedOption === 'HIPCalculator' && (
           <HIPCalculator
             onAmountSelect={(amount) => handleAmountSelect(amount)}
             onPeriodRangeSelect={(range) => handlePeriodRangeSelect(range)}
             onInterestRateSelect={(rate) => handleInterestRateSelect(rate)}
-            onCalculate={(e)=>handleCalculate(e)}
+            onCalculate={(e) => handleCalculate(e)}
             onUpdateSimpleInterest={handleUpdateSimpleInterest}
           />
         )}
-  
+
         {selectedOption === 'SIPCalculator' && (
-          <SIPCalculator />
+          <SIPCalculator
+            
+          />
         )}
-  
-        {showInvestmentSummary && selectedOption !== 'HIPCalculator' &&(
+
+        {showInvestmentSummary && selectedOption !== 'HIPCalculator' && (
           <SimpleInterestCalculator
             investedAmount={parseFloat(selectedAmountRange)} // Ensure it's a number
             durationMonths={selectedPeriodRange}
@@ -171,7 +173,7 @@ const App = () => {
       </div>
     </div>
   );
-  
+
 };
 export default App;
 

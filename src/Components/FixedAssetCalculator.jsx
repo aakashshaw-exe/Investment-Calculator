@@ -102,7 +102,7 @@ const FixedAssetCalculator = ({
 
         <div>
           <label htmlFor="durationRange" className="block text-zinc-950 text-sm font-bold mt-2">
-            Select Duration Range:
+            Select Duration Range (Months):
           </label>
           <select
             id="durationRange"
