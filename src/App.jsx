@@ -56,6 +56,7 @@ const App = () => {
       console.error('Invalid option selected.');
       return;
     }
+    console.log('Calculating with selectedOption:', selectedOption);
 
     const principal = parseFloat(selectedAmountRange) || 0;
     const time = parseFloat(selectedPeriodRange) || 0;
@@ -78,6 +79,7 @@ const App = () => {
     setAssetUnderManagement(principal + simpleInterest);
 
     setShowInvestmentSummary(false);
+    console.log('Calculation completed. Estimated Returns:', simpleInterest);
   };
 
   // Function to handle the update of Simple Interest values
@@ -130,7 +132,7 @@ const App = () => {
             onAmountSelect={(amount) => handleAmountSelect(amount)}
             onPeriodRangeSelect={(range) => handlePeriodRangeSelect(range)}
             onInterestRateSelect={(rate) => handleInterestRateSelect(rate)}
-            onCalculate={() => handleCalculate()}
+            onCalculate={(e) => handleCalculate(e)}
           />
         )}
   
@@ -139,7 +141,7 @@ const App = () => {
             onAmountSelect={(amount) => handleAmountSelect(amount)}
             onPeriodRangeSelect={(range) => handlePeriodRangeSelect(range)}
             onInterestRateSelect={(rate) => handleInterestRateSelect(rate)}
-            onCalculate={() => handleCalculate()}
+            onCalculate={(e) => handleCalculate(e)}
           />
         )}
   
@@ -148,7 +150,7 @@ const App = () => {
             onAmountSelect={(amount) => handleAmountSelect(amount)}
             onPeriodRangeSelect={(range) => handlePeriodRangeSelect(range)}
             onInterestRateSelect={(rate) => handleInterestRateSelect(rate)}
-            onCalculate={handleCalculate}
+            onCalculate={(e)=>handleCalculate(e)}
             onUpdateSimpleInterest={handleUpdateSimpleInterest}
           />
         )}

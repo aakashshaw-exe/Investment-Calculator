@@ -62,11 +62,19 @@ const LiquidAssetCalculator = ({
               className=" shadow appearance-none border rounded w-1/2 py-2 px-3 text-zinc-950 leading-tight focus:outline-none focus:shadow-outline"
               type="number"
               value={investmentAmount}
-              onChange={(e) => handleAmountChange(e.target.value)}
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                if (/^\d*\.?\d+$/.test(inputValue) && inputValue <= 100000) {
+                  handleAmountChange(inputValue);
+                } else if (inputValue === '') {
+                  handleAmountChange('');
+                }
+
+              }}
             />
           </div>
         </div>
-  
+
         <div>
           <label htmlFor="durationType" className="block text-zinc-950 text-sm font-bold mt-2">
             Select Duration Type:
@@ -82,7 +90,7 @@ const LiquidAssetCalculator = ({
             <option value="months">Months</option>
           </select>
         </div>
-  
+
         {durationType === 'days' && (
           <div>
             <label htmlFor="durationValue" className="block text-zinc-950 text-sm font-bold mt-2">
@@ -94,11 +102,19 @@ const LiquidAssetCalculator = ({
               className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-zinc-950 leading-tight focus:outline-none focus:shadow-outline"
               type="number"
               value={durationValue}
-              onChange={(e) => handleDurationChange(e.target.value)}
+              onChange={(e) => {
+                const inputDays = e.target.value;
+                if (/^\d*\.?\d+$/.test(inputDays) && inputDays <= 731) {
+                  handleDurationChange(inputDays);
+                } else if (inputDays === '') {
+                  handleDurationChange('');
+                }
+
+              }}
             />
           </div>
         )}
-  
+
         {durationType === 'months' && (
           <div>
             <label htmlFor="durationMonths" className="block text-zinc-950 text-sm font-bold mt-2">
@@ -107,7 +123,7 @@ const LiquidAssetCalculator = ({
             <select
               id="durationMonths"
               name="durationMonths"
-              className="block appearance-none w-1/2 border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="appearance-none w-1/2 border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               onChange={(e) => setDurationMonths(e.target.value)}
               value={durationMonths}
             >
@@ -118,23 +134,23 @@ const LiquidAssetCalculator = ({
             </select>
           </div>
         )}
-  
+
         <div className="mb-4">
           <p className="text-zinc-950 text-sm font-bold mb-2">Daily Interest Rate:</p>
           <p className="text-zinc-950 text-lg ">{interestRate}%</p>
         </div>
-  
+
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/2"
           type="button"
-          onClick={handleCalculate}
+          onClick={(e) => handleCalculate(e)}
         >
           Calculate
         </button>
       </form>
     </div>
-  ); 
-    
+  );
+
 };
 
 export default LiquidAssetCalculator;

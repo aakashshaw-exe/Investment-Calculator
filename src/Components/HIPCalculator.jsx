@@ -68,13 +68,13 @@ const HIPCalculator = () => {
       {/* Main Layout */}
       <div className="bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900 p-6 rounded-md shadow-md mx-auto max-w-md text-center text-white">
         <h1 className="text-2xl font-bold mb-4">HIP Calculator</h1>
-  
+
         {isTerminated ? (
           <p className="text-red-600 font-bold">Plan Terminated</p>
         ) : (
           <div className="mb-4 ">
             <p className="mb-4">Enter the investment amount for each month:</p>
-            <div className="grid grid-cols-2 gap-y-3 "> 
+            <div className="grid grid-cols-2 gap-y-3 ">
               {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((monthName, monthIndex) => (
                 <React.Fragment key={monthIndex}>
                   <div className="flex items-center ">
@@ -85,7 +85,12 @@ const HIPCalculator = () => {
                       className="border rounded px-2 py-1 text-black"
                       type="number"
                       value={investments[monthIndex]}
-                      onChange={(e) => handleInvestmentChange(monthIndex, e.target.value)}
+                      onChange={(e) => {
+                        const inputValue = e.target.value;
+                        if (/^\d*\.?\d+$/.test(inputValue) || inputValue === '') {
+                          handleInvestmentChange(monthIndex,inputValue);
+                        }
+                      }}
                     />
                   </div>
                 </React.Fragment>
@@ -93,7 +98,7 @@ const HIPCalculator = () => {
             </div>
           </div>
         )}
-  
+
         <div className="flex justify-center">
           <button
             className="bg-cardin-green hover:bg-red-700 text-black font-bold py-2 px-4 mr-2"
@@ -108,13 +113,13 @@ const HIPCalculator = () => {
             Continue
           </button>
         </div>
-  
+
         <hr className="my-4 border-white" />
       </div>
-  
+
       {/* Space between main layout and investment summary */}
       <div className="my-8" />
-  
+
       {/* Investment Summary */}
       <div className="bg-gray-200 p-6 rounded-md shadow-md">
         <h2 className="text-2xl font-bold mb-4">Investment Summary</h2>
@@ -122,12 +127,12 @@ const HIPCalculator = () => {
           <p className="block text-gray-700 text-sm font-bold mb-2">Invested Amount:</p>
           <p className="text-blue-500 text-lg">₹{investedAmount.toFixed(2)}</p>
         </div>
-  
+
         <div className="mb-4">
           <p className="block text-gray-700 text-sm font-bold mb-2">Estimated Returns:</p>
           <p className="text-blue-500 text-lg">₹{estimatedReturns.toFixed(2)}</p>
         </div>
-  
+
         <div className="mb-4">
           <p className="block text-gray-700 text-sm font-bold mb-2">Asset Under Management:</p>
           <p className="text-blue-500 text-lg">₹{assetUnderManagement.toFixed(2)}</p>
@@ -135,10 +140,10 @@ const HIPCalculator = () => {
       </div>
     </div>
   );
-  
-  
-   
-  
+
+
+
+
 };
 
 export default HIPCalculator;

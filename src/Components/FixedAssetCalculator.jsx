@@ -70,7 +70,12 @@ const FixedAssetCalculator = ({
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-950 leading-tight focus:outline-none focus:shadow-outline"
                 type="number"
                 value={investmentAmount}
-                onChange={(e) => handleAmountChange(e.target.value)}
+                onChange={(e) => {
+                  const inputValue =e.target.value;
+                if(/^\d*\.?\d+$/.test(inputValue) && inputValue <= 100000 || inputValue=== ''){
+                  handleAmountChange(inputValue);
+                }
+              }}
               />
             </div>
 

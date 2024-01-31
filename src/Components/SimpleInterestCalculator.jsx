@@ -28,7 +28,7 @@ const SimpleInterestCalculator = ({ investedAmount, durationMonths, interestRate
       <div className="mb-4">
         <p className="block text-gray-700 text-sm font-bold mb-2">Invested Amount:</p>
         <p className="text-blue-500 text-lg">
-          {typeof investedAmount === 'number'
+          { investedAmount >=0
             ? `₹${investedAmount.toFixed(2)}`
             : '₹0.00'}
         </p>
