@@ -7,14 +7,15 @@ const FixedAssetCalculator = ({
   onCalculate,
 }) => {
   const [investmentAmount, setInvestmentAmount] = useState(2000);
-  const [durationMonths, setDurationMonths] = useState("1 month");
+  const [durationMonths, setDurationMonths] = useState("3 month");
   const [interestRate, setInterestRate] = useState(5); // Default interest rate for the specified range
   const [exactAmountSelected, setExactAmountSelected] = useState(true);
+  const [invalidAmountMessage, setInvalidAmountMessage] = useState('');
 
   const updateInterestRate = (amount) => {
-    if (amount >= 2000 && amount <= 5000) {
+    if (amount >= 2000 && amount <= 4999) {
       setInterestRate(5);
-    } else if (amount >= 5001 && amount <= 10000) {
+    } else if (amount >= 5000 && amount <= 9999 ) {
       setInterestRate(5.25);
     } else if (amount > 10000) {
       setInterestRate(6);
@@ -22,11 +23,19 @@ const FixedAssetCalculator = ({
   };
 
   const handleAmountChange = (value) => {
-    setInvestmentAmount(value);
-    updateInterestRate(value);
+    const parsedValue = parseFloat(value);
+    setInvestmentAmount(parsedValue);
+
+    if (parsedValue >= 2000) {
+      setInvalidAmountMessage('');
+      updateInterestRate(parsedValue);
+    } else {
+      setInvalidAmountMessage('*Enter amount above 2000');
+    }
   };
 
   const handleCalculate = (event) => {
+    if (investmentAmount >= 2000) {
     event.stopPropagation();
     const calculatedAmount = exactAmountSelected
       ? parseFloat(investmentAmount)
@@ -49,12 +58,11 @@ const FixedAssetCalculator = ({
 
     // Trigger the parent component's calculate function
     onCalculate(event);
+  }
   };
 
   return (
-    <div className="bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900  p-6 rounded-md shadow-md mx-auto max-w-md">
-
-
+    <div className="bg-white  p-6 rounded-3xl shadow-md mx-auto max-w-md">
       <h2 className="text-2xl font-bold mb-4 text-center text-zinc-950">Fixed Asset Calculator</h2>
       <form className="space-y-4">
 
@@ -70,13 +78,17 @@ const FixedAssetCalculator = ({
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-950 leading-tight focus:outline-none focus:shadow-outline"
                 type="number"
                 value={investmentAmount}
+                
                 onChange={(e) => {
                   const inputValue =e.target.value;
-                if(/^\d*\.?\d+$/.test(inputValue) && inputValue <= 100000 || inputValue=== ''){
+                if(/^\d*\.?\d+$/.test(inputValue)  && inputValue <= 1000000 || inputValue=== ''){
                   handleAmountChange(inputValue);
                 }
               }}
               />
+              {invalidAmountMessage && (
+              <span className="text-red-500">{invalidAmountMessage}</span>
+            )}
             </div>
 
             <div className="mt-2 flex items-center space-x-4">
@@ -86,7 +98,7 @@ const FixedAssetCalculator = ({
               <input
                 id="rangeInput"
                 type="range"
-                min="1000"
+                min="2000"
                 max="100000"
                 step="9000"
                 value={investmentAmount}
@@ -112,7 +124,7 @@ const FixedAssetCalculator = ({
             value={durationMonths}
           >
             {/* Adjusted option values for duration dropdown */}
-            {Array.from({ length: 24 }, (_, i) => i + 1).map((month) => (
+            {Array.from({ length: 22 }, (_, i) => i + 3).map((month) => (
               <option key={month} value={`${month} month`}>{month}</option>
             ))}
           </select>
@@ -124,7 +136,7 @@ const FixedAssetCalculator = ({
         </div>
 
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+          className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
           type="button"
           onClick={(event) => handleCalculate(event)}
         >

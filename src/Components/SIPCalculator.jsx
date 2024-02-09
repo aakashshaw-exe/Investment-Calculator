@@ -3,7 +3,7 @@ import lock from '../Components/lock-image.png';
 
 const SIPCalculator = () => {
   return (
-    <div className="relative bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900 p-6 rounded-md shadow-md mx-auto max-w-md text-white">
+    <div className="relative bg-gradient-to-bl from-indigo-900 via-indigo-400 to-indigo-900 p-4 mb-8 rounded-md shadow-md mx-auto max-w-md text-white">
       {/* Glassmorphism Effect */}
       <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur border border-white border-opacity-10 rounded-md shadow-md"></div>
 
@@ -19,7 +19,7 @@ const SIPCalculator = () => {
 
       <div className="mt-4">
         <p className="mb-4">Enter the investment amount for each month:</p>
-        {[...Array(7).keys()].map((monthIndex) => (
+        {[...Array(6).keys()].map((monthIndex) => (
           <div key={monthIndex} className="mb-4 flex items-center">
             <label className="mr-2">{`Month ${monthIndex + 1}: ₹`}</label>
             <input

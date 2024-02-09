@@ -23,11 +23,11 @@ const SimpleInterestCalculator = ({ investedAmount, durationMonths, interestRate
   }, [investedAmount, durationMonths, interestRate]);
 
   return (
-    <div className="bg-gray-200 p-6 rounded-md shadow-md mt-4">
-      <h2 className="text-2xl font-bold mb-4">Investment Summary</h2>
+    <div className="bg-indigo-400 p-6 rounded-md shadow-md mt-4">
+      <h2 className=" text-white text-2xl font-bold mb-4">Investment Summary</h2>
       <div className="mb-4">
-        <p className="block text-gray-700 text-sm font-bold mb-2">Invested Amount:</p>
-        <p className="text-blue-500 text-lg">
+        <p className="block text-white text-sm font-bold mb-2">Invested Amount:</p>
+        <p className="text-white text-lg">
           { investedAmount >=0
             ? `₹${investedAmount.toFixed(2)}`
             : '₹0.00'}
@@ -35,8 +35,8 @@ const SimpleInterestCalculator = ({ investedAmount, durationMonths, interestRate
       </div>
 
       <div className="mb-4">
-        <p className="block text-gray-700 text-sm font-bold mb-2">Estimated Returns:</p>
-        <p className="text-blue-500 text-lg">
+        <p className="block text-white text-sm font-bold mb-2">Estimated Returns:</p>
+        <p className="text-white text-lg">
           {typeof estimatedReturns === 'number'
             ? `₹${estimatedReturns.toFixed(2)}`
             : '₹0.00'}
@@ -44,8 +44,8 @@ const SimpleInterestCalculator = ({ investedAmount, durationMonths, interestRate
       </div>
 
       <div className="mb-4">
-        <p className="block text-gray-700 text-sm font-bold mb-2">Asset Under Management:</p>
-        <p className="text-blue-500 text-lg">
+        <p className="block text-white text-sm font-bold mb-2">Net Amount</p>
+        <p className="text-white text-lg">
           {typeof assetUnderManagement === 'number'
             ? `₹${assetUnderManagement.toFixed(2)}`
             : '₹0.00'}
