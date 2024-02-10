@@ -14,7 +14,7 @@ const FixedAssetCalculator = ({
   const updateInterestRate = (amount) => {
     if (amount >= 2000 && amount <= 4999) setInterestRate(5);
     else if (amount >= 5000 && amount <= 9999) setInterestRate(5.25);
-    else if (amount > 10000) setInterestRate(6);
+    else if (amount >= 10000) setInterestRate(6);
   };
 
   const handleAmountChange = (value) => {
@@ -28,7 +28,7 @@ const FixedAssetCalculator = ({
       setInvalidAmountMessage('*Enter amount above 2000');
     }
   };
-  
+
   const handleCalculate = (event) => {
     if (investmentAmount < 2000) {
       console.error('*Enter amount above 2000');
@@ -41,6 +41,23 @@ const FixedAssetCalculator = ({
     onCalculate(event);
   };
 
+  // Function to calculate the step based on the current investment amount
+  const calculateStep = (amount) => {
+    if (amount < 5000) {
+      return 3000; // Increment by 3000 until 5000
+    } else if (amount < 10000) {
+      return 5000; // Increment by 5000 until 10000
+    } else {
+      // For amounts greater than or equal to 10000
+      const remainder = amount % 10000; // Calculate the remainder
+      if (remainder === 0) {
+        return 10000; // If the remainder is 0, step is 10000
+      } else {
+        // Find the next multiple of 10000 and use that as the step
+        return Math.ceil(amount / 10000) * 10000 - amount;
+      }
+    }
+  };
   return (
     <div className="bg-white p-6 rounded-3xl shadow-md mx-auto max-w-md">
       <h2 className="text-2xl font-bold mb-4 text-center text-zinc-950">Fixed Asset Calculator</h2>
@@ -57,11 +74,11 @@ const FixedAssetCalculator = ({
               type="number"
               value={investmentAmount}
               onChange={(e) => {
-                const inputValue =e.target.value;
-              if(/^\d*\.?\d+$/.test(inputValue)  && inputValue <= 1000000 || inputValue=== ''){
-                handleAmountChange(inputValue);
-              }
-            }}
+                const inputValue = e.target.value;
+                if (/^\d*\.?\d+$/.test(inputValue) && inputValue <= 1000000 || inputValue === '') {
+                  handleAmountChange(inputValue);
+                }
+              }}
             />
             <div className="mb-2">
               {invalidAmountMessage && (
@@ -77,9 +94,9 @@ const FixedAssetCalculator = ({
               type="range"
               min="2000"
               max="100000"
-              step="9000"
+              step={calculateStep(investmentAmount)}
               value={investmentAmount}
-              onChange={(e) => handleAmountChange(e.target.value)}
+              onChange={(e) => handleAmountChange(parseFloat(e.target.value))}
               className="flex-1"
               list="investmentAmountList"
             />
