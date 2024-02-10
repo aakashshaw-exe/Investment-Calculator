@@ -9,19 +9,39 @@ const LiquidAssetCalculator = ({
   const [investmentAmount, setInvestmentAmount] = useState(2000);
   const [durationValue, setDurationValue] = useState(30); // Default duration value
   const interestRate = 0.1; // Constant interest rate per day
+  const [invalidAmountMessage, setInvalidAmountMessage] = useState('');
 
   const handleAmountChange = (value) => {
-    setInvestmentAmount(value);
+    const parsedValue = parseInt(value);
+    setInvestmentAmount(parsedValue);
+
+    if (parsedValue >= 2000 || value === '') {
+      setInvalidAmountMessage('');
+    } else {
+      setInvalidAmountMessage('*Enter amount above 2000');
+    }
   };
 
   const handleDurationChange = (value) => {
-    setDurationValue(value);
+    const parsedValue = parseInt(value);
+    setDurationValue(parsedValue);
   };
 
   const handleCalculate = () => {
-    const calculatedAmount = parseFloat(investmentAmount) || 0;
+    const parsedInvestmentAmount = parseInt(investmentAmount) || 0;
 
-    onAmountSelect(calculatedAmount);
+   // Check if investment amount is less than 2000
+  if (parsedInvestmentAmount < 2000) {
+    // Display error message
+    setInvalidAmountMessage('*Enter amount above 2000');
+    return; // Exit the function without proceeding with the calculation
+  }
+
+  // Reset error message if the amount is valid
+  setInvalidAmountMessage('');
+
+  // Proceed with the calculation
+  onAmountSelect(parsedInvestmentAmount);
 
     if (durationValue > 0) {
       onPeriodRangeSelect(`${durationValue} days`);
@@ -54,13 +74,18 @@ const LiquidAssetCalculator = ({
               value={investmentAmount}
               onChange={(e) => {
                 const inputValue = e.target.value;
-                if (/^\d*\.?\d+$/.test(inputValue) && inputValue <= 100000) {
+                if (/^\d*\.?\d+$/.test(inputValue) && inputValue <= 1000000) {
                   handleAmountChange(inputValue);
                 } else if (inputValue === '') {
                   handleAmountChange('');
                 }
               }}
             />
+            <div className="mb-2">
+              {invalidAmountMessage && (
+                <span className="text-red-500 block">{invalidAmountMessage}</span>
+              )}
+            </div>
           </div>
         </div>
 
@@ -83,6 +108,7 @@ const LiquidAssetCalculator = ({
               }
             }}
           />
+
         </div>
 
         <div className="mb-4">

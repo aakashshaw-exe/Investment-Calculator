@@ -44,7 +44,7 @@ const SimpleInterestCalculator = ({ investedAmount, durationMonths, interestRate
       </div>
 
       <div className="mb-4">
-        <p className="block text-white text-sm font-bold mb-2">Net Amount</p>
+        <p className="block text-white text-sm font-bold mb-2">Net Amount:</p>
         <p className="text-white text-lg">
           {typeof assetUnderManagement === 'number'
             ? `₹${assetUnderManagement.toFixed(2)}`

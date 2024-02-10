@@ -129,7 +129,7 @@ const App = () => {
 
   </div>
       {/* Space for fixed header */}
-      <div className="mt-44">
+      <div className="mt-36">
         {/* Your existing component rendering code */}
         {selectedOption === 'FixedAsset' && (
           <FixedAssetCalculator
